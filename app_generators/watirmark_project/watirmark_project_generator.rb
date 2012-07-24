@@ -13,8 +13,18 @@ class WatirmarkProjectGenerator < RubiGen::Base
   def manifest
     record do |m|    
       create_directories(m)
+      #gemfile and config
       m.template "gemfile.rb.erb", "#{@name}/Gemfile"
-      m.template "local_config.rb.erb", "#{@name}/config.txt"
+      m.template "example_config.rb.erb", "#{@name}/config.example"
+
+      #rspec
+      m.template "sample_spec.rb.erb", "#{@name}/spec/examples/sample_spec.rb"
+      m.template "sample_spec_helper.rb.erb", "#{@name}/spec/spec_helper.rb"
+
+      #cucumber
+      m.template "sample_env.rb.erb", "#{@name}/features/support/env.rb"
+      m.template "sample_feature.rb.erb", "#{@name}/features/examples/sample_feature.rb"
+      m.template "sample_step_def.rb.erb", "#{@name}/features/step_definitions/sample_step_def.rb"
     end
   end
 
@@ -25,17 +35,20 @@ class WatirmarkProjectGenerator < RubiGen::Base
       "#{@name}/cla",
       "#{@name}/sf",
       "#{@name}/spec",
+      "#{@name}/spec/examples",
       "#{@name}/features",
-      "#{@name}/features/step_definitions",
-      "#{@name}/features/support"
+      "#{@name}/features/support",
+      "#{@name}/features/examples",
+      "#{@name}/features/step_definitions"
     ].each { |path| m.directory path }
   end
   
   protected
+
     def banner
       <<-EOS
-USAGE: #{spec.name} path/for/your/test/project project_name [options]
-EOS
+      USAGE: #{spec.name} path/for/your/test/project project_name [options]
+      EOS
     end
 
     def add_options!(opts)
