@@ -1,0 +1,13 @@
+$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/../clo/lib')
+$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/../cla/lib')
+$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/../sf/lib')
+
+require 'crm' #really clo
+require 'common_ground' #really crm
+require 'cla'
+
+RSpec.configure do |runner|
+  runner.before(:all) do
+    config = Watirmark::Configuration.instance
+  end
+end

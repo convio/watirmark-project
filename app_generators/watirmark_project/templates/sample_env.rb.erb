@@ -1,0 +1,16 @@
+$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/../../clo/lib')
+$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/../../cla/lib')
+$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/../../sf/lib')
+
+require 'crm' #really clo
+require 'cla'
+require 'common_ground' #really crm
+
+require 'watirmark/cucumber/env'
+
+module IncludeInCucumber
+  def config
+    Watirmark::Configuration.instance
+  end
+end
+World IncludeInCucumber
