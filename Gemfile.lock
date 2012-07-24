@@ -1,0 +1,15 @@
+GEM
+  specs:
+    activesupport (3.1.4)
+      multi_json (~> 1.0)
+    i18n (0.6.0)
+    multi_json (1.3.6)
+    rubigen (1.5.8)
+      activesupport (>= 2.3.5, < 3.2.0)
+
+PLATFORMS
+  x86-mingw32
+
+DEPENDENCIES
+  i18n
+  rubigen
