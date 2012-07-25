@@ -20,7 +20,7 @@ class SVNClient
   end
 
   #assumes project scaffolding has already run.
-  #will import skeleton project, set externals,
+  #will svn import skeleton project, set externals,
   #and commit.
   def project_setup
     import @project_path, @repository_url
