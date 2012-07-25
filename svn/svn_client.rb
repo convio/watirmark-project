@@ -1,9 +1,11 @@
 class SVNClient
 
-  def initialize path_to_project, project_name
+  def initialize path_to_project, project_name, user_auth_provided
     #auth
-    @username = nil
-    @password = nil
+    if user_auth_provided
+      @username = ENV['SVN_USER']
+      @password = ENV['SVN_PASS']
+    end
 
     #project info
     @project_name = project_name
@@ -36,23 +38,31 @@ class SVNClient
   private
 
   def checkout url, dest_path
-    raise Exception, "checkout failed" if !system("svn checkout #{url} #{dest_path}")
+    raise Exception, "checkout failed" if !system("svn checkout #{auth}#{url} #{dest_path}")
   end
 
   def import path, url
-    raise Exception, "import failed" if !system("svn import -m \"Project skeleton commit\" #{path} #{url}")
+    raise Exception, "import failed" if !system("svn import -m \"Project skeleton commit\" #{auth}#{path} #{url}")
   end
 
   def commit path, msg
-    raise Exception, "commit failed" if !system("svn commit #{path} -m \"#{msg}\"")
+    raise Exception, "commit failed" if !system("svn commit #{auth}#{path} -m \"#{msg}\"")
   end
 
   def set_external propval, path_to_dir
-    raise Exception, "propset failed" if !system("svn propset svn:externals \"#{propval}\" #{path_to_dir}")
+    raise Exception, "propset failed" if !system("svn propset #{auth}svn:externals \"#{propval}\" #{path_to_dir}")
   end
 
   def rm dir
     raise Exception, "rmdir failed" if !system("rmdir /S /Q #{dir}")
+  end
+
+  def auth
+    if @username and @password
+      "--username=#{@username} --password=#{@password} "
+    else
+      ""
+    end
   end
 
 end
