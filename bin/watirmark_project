@@ -16,6 +16,8 @@ else
   args << ENV['PROJECT_NAME']
 end
 
+raise Exception, "No args provided" unless args[0] and args[1]
+
 source = RubiGen::PathSource.new(:application,File.join(File.dirname(__FILE__), "../app_generators"))
 RubiGen::Base.reset_sources
 RubiGen::Base.append_sources source
@@ -23,7 +25,11 @@ RubiGen::Scripts::Generate.new.run(args, :generator => 'watirmark_project')
 
 puts "using PATH:" + args[0] + " NAME:" + args[1]
 
-svnc = SVNClient.new(args[0], args[1])
+auth_provided = (ENV['SVN_USER'] and ENV['SVN_PASS'])
+
+puts "Using provided credentials" if auth_provided
+
+svnc = SVNClient.new(args[0], args[1], auth_provided)
 svnc.project_setup
 
 
