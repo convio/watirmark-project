@@ -4,7 +4,7 @@ class WatirmarkProjectGenerator < RubiGen::Base
 
   def initialize(args, runtime_options = {})
     super
-    usage if args.empty? and !File.dirname(__FILE__) =~ /\/hudson\/workspace\//
+    usage if args.empty?
     @name = File.basename(args[0])
     @destination_root = File.dirname(File.expand_path(args[0]))
     extract_options
