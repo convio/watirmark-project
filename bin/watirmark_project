@@ -8,15 +8,12 @@ require 'svn_client'
 
 #grab project name and path from cmd line args or env var
 args = []
-puts File.dirname(__FILE__).to_s
-if File.dirname(__FILE__) =~ /\/hudson\/workspace\//
-  puts "Harro1"
-  args << ENV['PROJECT_PATH']
-  args << ENV['PROJECT_NAME']
-else
-  puts "Harro2"
+if ARGV[0] and ARGV[1]
   args << ARGV[0]
   args << ARGV[1]
+else
+  args << ENV['PROJECT_PATH']
+  args << ENV['PROJECT_NAME']
 end
 
 source = RubiGen::PathSource.new(:application,File.join(File.dirname(__FILE__), "../app_generators"))
