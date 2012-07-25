@@ -59,7 +59,7 @@ class SVNClient
 
   def auth
     if @username and @password
-      "--username=#{@username} --password=#{@password} "
+      "--username=#{@username} --password=#{@password} --no-auth-cache "
     else
       ""
     end
