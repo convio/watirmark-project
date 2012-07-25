@@ -8,6 +8,7 @@ require 'svn_client'
 
 #grab project name and path from cmd line args or env var
 args = []
+puts File.dirname(__FILE__).to_s
 if File.dirname(__FILE__) =~ /\/hudson\/workspace\//
   puts "Harro1"
   args << ENV['PROJECT_PATH']
