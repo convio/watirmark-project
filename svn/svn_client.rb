@@ -54,7 +54,7 @@ class SVNClient
   end
 
   def rm dir
-    raise Exception, "rmdir failed" if !system("rmdir /S /Q #{dir}")
+    raise Exception, "rm failed" if !system("rm -rf #{dir}")
   end
 
   def auth
