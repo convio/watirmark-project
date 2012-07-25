@@ -1,6 +1,6 @@
 class SVNClient
 
-  def initialize project_name, path_to_project
+  def initialize path_to_project, project_name
     #auth
     @username = nil
     @password = nil
