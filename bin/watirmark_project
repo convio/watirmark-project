@@ -11,10 +11,20 @@ RubiGen::Base.reset_sources
 RubiGen::Base.append_sources source
 RubiGen::Scripts::Generate.new.run(ARGV, :generator => 'watirmark_project')
 
-#grab project name and path from cmd line args
+#grab project name and path from cmd line args or env var
+project_path = nil
+project_name = nil
+if File.dirname(__FILE__) =~ /\/hudson\/workspace\//
+  project_path = ENV['PROJECT_PATH']
+  project_name = ENV['PROJECT_NAME']
+else
+  project_path = ARGV[0]
+  project_name = ARGV[1]
+end
 
-project_path = ARGV[0]
-project_name = ARGV[1]
+if !project_path or !project_name
+  raise ArguementError, "Please set proejct path and name"
+end
 
 puts "using PATH:" + project_path + " NAME:" + project_name
 
