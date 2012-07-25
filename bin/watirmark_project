@@ -1,10 +1,25 @@
 #!/usr/bin/env ruby
 $:<< File.dirname(__FILE__)
+$:<< File.expand_path(File.dirname(__FILE__) + '/../svn')
 
 require 'rubigen'
 require 'rubigen/scripts/generate'
+require 'svn_client'
 
 source = RubiGen::PathSource.new(:application,File.join(File.dirname(__FILE__), "../app_generators"))
 RubiGen::Base.reset_sources
 RubiGen::Base.append_sources source
 RubiGen::Scripts::Generate.new.run(ARGV, :generator => 'watirmark_project')
+
+#grab project name and path from cmd line args
+
+project_path = ARGV[0]
+project_name = ARGV[1]
+
+puts "using PATH:" + project_path + " NAME:" + project_name
+
+svnc = SVNClient.new(project_name, project_path)
+svnc.project_setup
+
+
+
