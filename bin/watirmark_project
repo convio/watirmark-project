@@ -22,8 +22,8 @@ else
   project_name = ARGV[1]
 end
 
-if !project_path or !project_name
-  raise ArguementError, "Please set proejct path and name"
+if project_path == nil or project_name == nil
+  raise ArguementError, "Please set project path and name"
 end
 
 puts "using PATH:" + project_path + " NAME:" + project_name
