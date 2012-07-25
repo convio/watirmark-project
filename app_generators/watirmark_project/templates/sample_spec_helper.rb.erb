@@ -8,6 +8,6 @@ require 'cla'
 
 RSpec.configure do |runner|
   runner.before(:all) do
-    config = Watirmark::Configuration.instance
+    @config = Watirmark::Configuration.instance
   end
 end
