@@ -23,7 +23,7 @@ class WatirmarkProjectGenerator < RubiGen::Base
 
       #cucumber
       m.template "sample_env.rb.erb", "#{@name}/features/support/env.rb"
-      m.template "sample_feature.rb.erb", "#{@name}/features/examples/sample_feature.feature"
+      m.template "sample_feature.feature.erb", "#{@name}/features/examples/sample_feature.feature"
       m.template "sample_step_def.rb.erb", "#{@name}/features/step_definitions/sample_step_def.rb"
     end
   end
